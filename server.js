@@ -2,10 +2,18 @@ const express = require('express');
 const dotenv = require('dotenv');
 const colors = require('colors');
 const morgan = require('morgan');
+const connectDB = require('./config/db');
 
+// custom path to config variables
 dotenv.config({ path: './config/config.env' });
 
 const app = express();
+
+// use bodyParser
+app.use(express.json());
+
+// connect to the database
+connectDB();
 
 app.use('/api/v1/transactions', require('./routes/transactions-route'));
 
